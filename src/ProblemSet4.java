@@ -1,39 +1,31 @@
 public class ProblemSet4 {
 	
 	public static void main(String[] args) {
-		ProblemSet4 ps4 = new ProblemSet4();
-		ps4.surroundMe("<<>>", "abc");
-		ps4.endsMeet("basl", 3);
-		ps4.middleMan("programming");
-		ps4.doubleVision("qwerty");
-		ps4.centered("programming", "ram");
-		ps4.upOrDown(12.2, 'c');
-		ps4.countMe("these are just some sample words", 'e');
-		ps4.isNotEqual("is not is not");
-		ps4.triplets("aaabbbbccccc");
-		ps4.addMe("a123b456c789", false);
+		ProblemSet4 ps = new ProblemSet4();
+	    System.out.println(ps.surroundMe("<<>>", "abc"));
+		System.out.println(ps.endsMeet("qwerty", 2));
+		System.out.println(ps.middleMan("candy"));
+		System.out.println(ps.doubleVision("qwerty"));
+		System.out.println(ps.centered("programming", "ram"));
+		System.out.println(ps.upOrDown(12.7, 'r'));
+		System.out.println(ps.countMe("one more batch of sample words", 'h'));
+		System.out.println(ps.isNotEqual("is not is not is not"));
+		System.out.println(ps.triplets("aaabbbbccccc"));
+		System.out.println(ps.addMe("a123b456c789", false));
 	}
 	
-	public String surroundMe(String in, String out) {
-		int lengthIn = in.length();
-		int lengthOut = out.length();
-		if (in.equals(null) || out.equals(null)) {
+	public String surroundMe(String out, String in) {
+		if (out == null || in == null) {
 			return null;
 		}
-		else if (lengthIn != 3) {
-			return null;
-		}
-		else if (lengthOut != 4) {
-			return null;
-		}
-		else {
-		String outFirst = out.substring(0, 2);
-		String outLast = out.substring(2,4);
-		String lastString = outFirst + in + outLast;
-		System.out.println(lastString);
-		return (lastString);
+		int outLength = out.length();
+		int inLength = in.length();
 		
+		if (outLength != 4 || inLength != 3 || out.charAt(0) != out.charAt(1) || out.charAt(2) != out.charAt(3)) {
+			return null;
 		}
+		
+		return (out.substring(0, 2) + in + out.substring(2, 4));
 	}
 	
 	public String endsMeet(String str, int n) {
@@ -146,26 +138,23 @@ public class ProblemSet4 {
 	}
 	
 	public int triplets(String str) {
-		boolean alpha = true;
-		for (int i = 0; i != str.length(); i++) {
-	        if (!Character.isLetter(str.charAt(i))) {
-	        	alpha = false;
-	        }
-	    }
-		if (str == null || str.contains(" ") == true || alpha == false ) {
+		if (str == null) {
 			return -1;
 		}
-		else {
-			int count = 0;
-			for (int i = 0;i < str.length(); i++) {
-				if(i > 0 ) {
-					if (str.charAt(i) == str.charAt(i-1) && str.charAt(i) == str.charAt(i+1)) {
-					count++;
-					}
-				}
+		
+		int length = str.length();
+		int count = 0;
+		for (int i = 0; i < length - 2; i++) {
+			if ((str.charAt(i) < 'A' || (str.charAt(i) > 'Z' && str.charAt(i) < 'a') || str.charAt(i) > 'z')) {
+				return -1;
 			}
-			return count;
+			
+			if (str.charAt(i) == str.charAt(i + 1) && str.charAt(i) == str.charAt(i + 2)) {
+				count++;
+			}
 		}
+		
+		return count;
 	}
 	
 	public int addMe(String str, boolean digits) {
